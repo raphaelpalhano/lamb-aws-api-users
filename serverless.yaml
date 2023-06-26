@@ -1,0 +1,34 @@
+service: api-users-lambda
+
+frameworkVersion: '3'
+
+plugins:
+  - serverless-offline
+  - serverless-plugin-typescript
+  - serverless-dotenv-plugin
+
+
+provider:
+  name: aws
+  stage: local
+  runtime: nodejs18.x
+  region: us-east-1
+  profile: localstack
+
+
+custom:
+  serverless-offline:
+    httpPort: 3003
+  serverless-offline-watcher:
+    - path:
+        - src
+      command: echo "src was modified, reloading..."
+    
+
+functions:
+  usersHandler:
+    handler: src/modules/users/handler.usersHandler
+    events:
+      - http:
+          method: POST
+          path: /api/v1/users

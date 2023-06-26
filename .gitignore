@@ -1,0 +1,15 @@
+
+# project
+dist
+.build
+.serverless
+coverage
+
+#env
+.env
+
+#NPM
+node_modules
+
+
+
